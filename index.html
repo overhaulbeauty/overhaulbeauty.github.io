@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overhaul Beauty</title>
+<meta name="description" content="Overhaul Beauty - Indonesian beauty curation from sales data, ratings and ingredients.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<header>
+  <div class="brand">Overhaul <span>Beauty</span></div>
+  <p>Kurasi skincare dari data penjualan, rating dan bahan. Bukan review pribadi.</p>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms of Service</a>
+  <a href="data-deletion.html">Data Deletion</a>
+</nav>
+
+<div class="card" id="login-code" hidden>
+  <h2>Login finished</h2>
+  <p>Copy the <strong>whole address</strong> from your browser's address bar and paste it into the window that asked for it. You can close this page afterwards.</p>
+  <div class="code" id="login-url"></div>
+</div>
+
+<h1>Overhaul Beauty</h1>
+<p>Overhaul Beauty is an Indonesian beauty account on TikTok (<a href="https://www.tiktok.com/@beautyoverhaul">@beautyoverhaul</a>),
+Instagram (<a href="https://www.instagram.com/overhaulbeauty">@overhaulbeauty</a>) and Threads
+(<a href="https://www.threads.com/@overhaulbeauty">@overhaulbeauty</a>).</p>
+<p>We curate skincare and beauty products from what people in Indonesia actually buy: sales data, ratings and ingredient lists.
+We do not review products we have not used. Our story series <em>Nara Cek Dulu</em> follows a fictional character; its videos are made with AI and labelled as such.</p>
+<p>Some links are affiliate links: we earn a commission, the price stays the same for you.</p>
+
+<h2>Overhaul Beauty Publisher</h2>
+<p>Overhaul Beauty Publisher is our own internal tool. It publishes Overhaul Beauty's own videos and posts to Overhaul Beauty's own
+TikTok, Instagram and Threads accounts. It is not offered to other users.</p>
+
+<footer>Contact: <a href="mailto:overhaulbeauty@proton.me">overhaulbeauty@proton.me</a></footer>
+</main>
+<script>
+  // TikTok login returns here with ?code=... : show the address so it can be copied.
+  var q = new URLSearchParams(location.search);
+  if (q.get("code") || q.get("error")) {
+    document.getElementById("login-code").hidden = false;
+    document.getElementById("login-url").textContent = location.href;
+  }
+</script>
+</body>
+</html>
