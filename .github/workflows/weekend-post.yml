@@ -1,0 +1,43 @@
+# Cloud poster for @overhaulbeauty while the PC is off (Ryan 2026-10-30). See cloud/post.py.
+# Times are UTC: 02:00 = 09:00 WIB status, 06:50 = 13:50 WIB post, then catch-up runs 14:20 / 14:50 / 15:30 / 17:00 WIB.
+name: weekend-post
+on:
+  schedule:
+    - cron: "0 2 * * *"
+    - cron: "50 6 * * *"
+    - cron: "20 7 * * *"
+    - cron: "50 7 * * *"
+    - cron: "30 8 * * *"
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "post | morning | dry"
+        default: "dry"
+      date:
+        description: "YYYY-MM-DD (empty = today WIB)"
+        default: ""
+permissions:
+  contents: write
+concurrency:
+  group: weekend-post
+  cancel-in-progress: false
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Post
+        env:
+          IG_TOKEN: ${{ secrets.OB_IG_ACCESS_TOKEN }}
+          TH_TOKEN: ${{ secrets.OB_THREADS_ACCESS_TOKEN }}
+          TG_TOKEN: ${{ secrets.OB_TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.OB_TELEGRAM_CHAT_ID }}
+          MODE: ${{ inputs.mode }}
+          DATE: ${{ inputs.date }}
+          EVENT: ${{ github.event.schedule }}
+        run: |
+          git config user.name "overhaulbeauty-cloud"
+          git config user.email "actions@users.noreply.github.com"
+          python3 cloud/post.py
